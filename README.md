@@ -1,7 +1,7 @@
 # icu-board-digitizer
 ICU Board Digitizer: High-precision pipeline to automate medical whiteboard data extraction. Uses OpenCV for perspective warping and GPT-4o Multimodal for intelligent OCR across 14 beds. Features SSIM-based Change Detection to optimize API costs and fuzzy logic to cross-reference patient databases into structured Excel reports.
 
-Module 1: Change Detection & Perspective Correction
+# Module 1: Change Detection & Perspective Correction
 01_change_detector.py
 
 
@@ -30,7 +30,7 @@ python change_detector.py
 
 Output: A file named change_detection_report.xlsx will be created with the list of frames ready for the next step (GPT-4o extraction).
 
-Module 2: AI-Powered Data Extraction
+# Module 2: AI-Powered Data Extraction
 data_extractor.py
 
 
@@ -62,15 +62,15 @@ Workflow / How to Use:
 
 
 ________________________________________________________________________________________________________________________
-Project Structure Recap
+# Project Structure Recap
 To keep things running smoothly, organize your folder like this:
 
 Plaintext
-├── change_detector.py       # Part 1: Filters changes
-├── data_extractor.py         # Part 2: AI Extraction
-├── reference_database.csv    # Your patient list
-├── input_images/             # Folder with ICU photos
-└── outputs/                  # Reports and Excel files
+change_detector.py       # Part 1: Filters changes
+data_extractor.py         # Part 2: AI Extraction
+reference_database.csv    # Your patient list
+input_images/             # Folder with ICU photos
+outputs/                  # Reports and Excel files
 
 Troubleshooting
 - "No images to process": Make sure the change_detection_report.xlsx from Part 1 exists and contains the filenames you want to analyze.
