@@ -31,7 +31,7 @@ python change_detector.py
 Output: A file named change_detection_report.xlsx will be created with the list of frames ready for the next step (GPT-4o extraction).
 
 # Module 2: AI-Powered Data Extraction
-data_extractor.py
+02_data_extractor.py
 
 
 This is the core of the system. It takes the images flagged by Module 1, corrects their perspective, and sends them to OpenAI's GPT-4o to extract patient information with high clinical accuracy.
