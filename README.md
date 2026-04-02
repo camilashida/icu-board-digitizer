@@ -65,14 +65,14 @@ ________________________________________________________________________________
 # Project Structure Recap
 To keep things running smoothly, organize your folder like this:
 
-Plaintext
-change_detector.py       # Part 1: Filters changes
-data_extractor.py         # Part 2: AI Extraction
-reference_database.csv    # Your patient list
-input_images/             # Folder with ICU photos
-outputs/                  # Reports and Excel files
+Plaintext:
+- change_detector.py       # Part 1: Filters changes
+- data_extractor.py         # Part 2: AI Extraction
+- reference_database.csv    # Your patient list
+- input_images/             # Folder with ICU photos
+- outputs/                  # Reports and Excel files
 
-Troubleshooting
+Troubleshooting:
 - "No images to process": Make sure the change_detection_report.xlsx from Part 1 exists and contains the filenames you want to analyze.
 - API Errors: Check if your OpenAI account has credits and if the GPT-4o model is available for your tier.
 - Alignment Issues: If the AI is "hallucinating" bed numbers, double-check the SOURCE_POINTS coordinates in both scripts. They must be identical to crop the image correctly.
