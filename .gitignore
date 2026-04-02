@@ -1,0 +1,11 @@
+# CUIDADO: Não subir dados sensíveis
+*.jpg
+*.png
+*.xlsx
+*.csv
+.env
+
+# Pastas de sistema e Python
+__pycache__/
+.venv/
+.vscode/
