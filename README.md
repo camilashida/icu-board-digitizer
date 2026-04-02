@@ -1,35 +1,40 @@
 # icu-board-digitizer
 ICU Board Digitizer: High-precision pipeline to automate medical whiteboard data extraction. Uses OpenCV for perspective warping and GPT-4o Multimodal for intelligent OCR across 14 beds. Features SSIM-based Change Detection to optimize API costs and fuzzy logic to cross-reference patient databases into structured Excel reports.
 
-Key Features:
-- Perspective Correction (Warping): Automatically flattens the whiteboard image for better readability.
-- Smart Change Detection (SSIM): Only processes images when the content actually changes, saving API costs.
-- AI-Powered Matching: Uses GPT-4o to correct handwriting typos by comparing them against a patient CSV.
-- Excel Export: Generates a structured report organized by bed number (1 to 14).
+Module 1: Change Detection & Perspective Correction
+01_change_detector.py
 
-Requirements:
-Before running the script, ensure you have:
-- Python 3.10 or higher installed.
-- An OpenAI API Key (with credits available).
-- The following Python libraries:
-  Bash
-  pip install opencv-python pandas scikit-image openai openpyxl
+This script serves as the intelligent filter of the pipeline. Instead of processing every single frame (which would be slow and expensive), this module identifies only the images where the ICU board content has actually changed.
 
-Setup & Usage (Step-by-Step):
-1. Prepare your Files
-- Patient Database: Create or update a file named "data/reference_list.csv". It must contain the columns: "Data" (date), "Primeiro Nome" (first name), and "Identificação do paciente" (pacient id).
-- Images: Place the whiteboard photos (JPG or PNG) in the folder defined in the code (default: data/input_images).
-2. Configure the Script:
-Open the .py file and update these lines:
-- client = OpenAI(api_key="YOUR_KEY_HERE") -> Insert your OpenAI key.
-**- PASTA_IMAGENS -> Update to the path where your photos are stored.
-**- ARQ_PACIENTES -> Update to the path of your CSV file.
-3. Run the Program
-Open your terminal or command prompt and run:
+What it does:
+Perspective Rectification (Warping): It takes a distorted photo of the whiteboard and "flattens" it into a perfect top-down rectangle using homography points.
+
+Sectional Analysis: It divides the board into 14 horizontal sections (one for each bed).
+
+SSIM Comparison: It uses the Structural Similarity Index (SSIM) to compare the current image against the last "saved" state. If the similarity score falls below 0.72, it flags the image as "changed."
+
+Reporting: It generates an Excel file listing only the filenames that contain new information.
+
+How to setup this specific script:
+To make this work on your computer, you need to adjust the Configuration section at the top of the code:
+
+INPUT_FOLDER: * Change: INPUT_FOLDER = "your_folder_path_here"
+
+Why: This is where your raw photos from the ICU are stored.
+
+SOURCE_POINTS: * Change: These are the (x, y) coordinates of the four corners of your whiteboard in the photo.
+
+Tip: Use a tool like Paint or an online image inspector to find the pixels for the Top-Left, Top-Right, Bottom-Right, and Bottom-Left corners.
+
+SIMILARITY_THRESHOLD: * Default is 0.72.
+
+If the script is too sensitive (saving images with just shadows/glare), increase it to 0.80.
+
+If it's ignoring real handwriting, decrease it to 0.65.
+
+Execution:
+Simply run the script via terminal:
+
 Bash
-python seu_arquivo.py
-
-Output Data:
-After execution, the system will create:
-Excel File (quadros_processados_github2.xlsx): A table with all beds filled.
-Folder (alteradas_github2): Contains copies of the images that were actually processed (where changes were detected).
+python change_detector.py
+Output: A file named change_detection_report.xlsx will be created with the list of frames ready for the next step (GPT-4o extraction).
