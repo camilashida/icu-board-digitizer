@@ -76,3 +76,15 @@ Troubleshooting:
 - "No images to process": Make sure the change_detection_report.xlsx from Part 1 exists and contains the filenames you want to analyze.
 - API Errors: Check if your OpenAI account has credits and if the GPT-4o model is available for your tier.
 - Alignment Issues: If the AI is "hallucinating" bed numbers, double-check the SOURCE_POINTS coordinates in both scripts. They must be identical to crop the image correctly.
+
+# Status
+**Working prototype with partial validation**
+
+The core pipeline is implemented and runs end-to-end, generating outputs from input images.  
+Results are not yet fully reliable and may vary depending on image quality, lighting conditions, and board layout.
+
+# Known Limitations
+- Performance drops in low-quality or low-light images  
+- Sensitive to variations in board structure and formatting  
+- Limited testing on diverse real-world datasets  
+- Not yet optimized for speed or large-scale use  
